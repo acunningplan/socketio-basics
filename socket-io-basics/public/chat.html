@@ -1,0 +1,17 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io("http://localhost:9000");
+  socket.on("messageFromServer", dataFromServer => {
+    console.log(dataFromServer);
+    socket.emit("messageToServer", { data: "Data from the client!" });
+  });
+
+  socket.on('ping', () => {
+    console.log("Ping was received from the server");
+  })
+
+  socket.on('pong', latency => {
+    console.log(latency);
+    console.log("Pong was received from the server")
+  })
+</script>
